@@ -145,7 +145,7 @@ export function Footer() {
                   GitHub
                 </a>
                 <a
-                  href="https://linkedin.com/in/knwar"
+                  href="https://www.linkedin.com/in/knwar"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:underline flex items-center gap-2"
@@ -159,7 +159,7 @@ export function Footer() {
                   LinkedIn
                 </a>
                 <a
-                  href="https://twitter.com/knwar"
+                  href="https://x.com/knwar_dev"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:underline flex items-center gap-2"
@@ -173,7 +173,7 @@ export function Footer() {
                   Twitter
                 </a>
                 <a
-                  href="https://instagram.com/knwar"
+                  href="https://instagram.com/knwar.dev"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:underline flex items-center gap-2"
@@ -187,7 +187,7 @@ export function Footer() {
                   Instagram
                 </a>
                 <a
-                  href="https://youtube.com/@knwar"
+                  href="https://youtube.com/@Knwar_dev"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:underline flex items-center gap-2"
@@ -219,7 +219,7 @@ export function Footer() {
               </h4>
               <div className="flex flex-col gap-3 items-center md:items-start">
                 <a
-                  href="mailto:knwar@example.com"
+                  href="mailto:contact@knwar.com"
                   className="hover:underline break-all"
                   style={{
                     fontFamily: 'Inter, sans-serif',
@@ -227,7 +227,7 @@ export function Footer() {
                     color: '#007AFF'
                   }}
                 >
-                  knwar@example.com
+                  contact@knwar.com
                 </a>
                 <button
                   onClick={scrollToTop}

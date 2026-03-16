@@ -38,7 +38,7 @@ export function Contact() {
                 EMAIL
               </p>
               <a 
-                href="mailto:knwar@example.com"
+                href="mailto:contact@knwar.com"
                 className="hover:underline break-all"
                 style={{ 
                   fontFamily: 'Inter, sans-serif',
@@ -46,7 +46,7 @@ export function Contact() {
                   color: '#007AFF'
                 }}
               >
-                knwar@example.com
+                contact@knwar.com
               </a>
             </div>
           </div>

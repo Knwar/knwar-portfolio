@@ -29,10 +29,10 @@ export const homepageSchema = {
       knowsAbout: ['Flutter', 'Dart', 'Swift', 'Node.js', 'Python', 'React', 'AWS', 'Firebase'],
       sameAs: [
         'https://github.com/knwar',
-        'https://linkedin.com/in/knwar',
-        'https://twitter.com/knwar',
-        'https://instagram.com/knwar',
-        'https://youtube.com/@knwar',
+        'https://www.linkedin.com/in/knwar',
+        'https://x.com/knwar_dev',
+        'https://instagram.com/knwar.dev',
+        'https://youtube.com/@Knwar_dev',
       ],
     },
     {

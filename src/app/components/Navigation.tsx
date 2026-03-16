@@ -69,7 +69,7 @@ export function Navigation() {
             className="font-bold cursor-pointer hover:opacity-70 transition-opacity"
             style={{ fontFamily: 'JetBrains Mono, monospace' }}
           >
-            K.
+            Knwar.
           </button>
 
           {/* Desktop Navigation */}
@@ -91,7 +91,7 @@ export function Navigation() {
             {/* Social Icons */}
             <div className="flex gap-4 ml-4 pl-4 border-l border-[#EEEEEE]">
               <a
-                href="https://instagram.com/knwar"
+                href="https://instagram.com/knwar.dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:opacity-70 transition-opacity"
@@ -99,7 +99,7 @@ export function Navigation() {
                 <Instagram size={20} />
               </a>
               <a
-                href="https://youtube.com/@knwar"
+                href="https://youtube.com/@Knwar_dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:opacity-70 transition-opacity"
@@ -151,7 +151,7 @@ export function Navigation() {
             {/* Mobile Social Icons */}
             <div className="flex gap-6 mt-8 pt-8 border-t border-[#EEEEEE]">
               <a
-                href="https://instagram.com/knwar"
+                href="https://instagram.com/knwar.dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:opacity-70 transition-opacity"
@@ -159,7 +159,7 @@ export function Navigation() {
                 <Instagram size={28} />
               </a>
               <a
-                href="https://youtube.com/@knwar"
+                href="https://youtube.com/@Knwar_dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:opacity-70 transition-opacity"

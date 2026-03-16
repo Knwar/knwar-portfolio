@@ -173,7 +173,7 @@ export function Hero() {
                   letterSpacing: '0.5px'
                 }}
               >
-                HIRE ME →
+                CONTACT ME →
               </button>
             </div>
           </div>

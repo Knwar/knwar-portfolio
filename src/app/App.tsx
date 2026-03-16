@@ -13,6 +13,7 @@ import { LogDetail } from './components/LogDetail';
 import { LogsIndex } from './components/LogsIndex';
 import { AboutPage } from './components/AboutPage';
 import { NotFound } from './components/NotFound';
+import { ProjectLegalPage } from './components/ProjectLegalPage';
 import { SEOHead } from './components/SEOHead';
 import { StructuredData, homepageSchema } from './components/StructuredData';
 
@@ -58,6 +59,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/project/:slug" element={<CaseStudy />} />
+        <Route path="/project/:slug/:pageType" element={<ProjectLegalPage />} />
         <Route path="/log/:slug" element={<LogDetail />} />
         <Route path="/logs" element={<LogsIndex />} />
         <Route path="/about" element={<AboutPage />} />

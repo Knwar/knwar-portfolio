@@ -67,3 +67,10 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
   ogImage,
   twitterHandle
 }`;
+
+export const PROJECT_LEGAL_QUERY = `*[_type == "projectLegal" && project->slug.current == $slug][0] {
+  privacyPolicy,
+  termsOfUse,
+  "projectTitle": project->title,
+  "projectSlug": project->slug.current
+}`;
