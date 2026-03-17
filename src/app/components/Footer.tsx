@@ -67,10 +67,11 @@ export function Footer() {
               >
                 INDEX
               </h4>
-              <nav className="flex flex-col gap-3">
+              {/* Mobile: horizontal row / Desktop: vertical stack */}
+              <nav className="flex flex-row flex-wrap justify-center gap-x-6 gap-y-2 md:flex-col md:gap-3 md:justify-start">
                 <button
                   onClick={() => handleFooterNav('projects')}
-                  className="hover:underline text-left md:text-left text-center"
+                  className="hover:underline"
                   style={{
                     fontFamily: 'Inter, sans-serif',
                     fontSize: '16px',
@@ -81,7 +82,7 @@ export function Footer() {
                 </button>
                 <button
                   onClick={() => navigate('/logs')}
-                  className="hover:underline text-left md:text-left text-center"
+                  className="hover:underline"
                   style={{
                     fontFamily: 'Inter, sans-serif',
                     fontSize: '16px',
@@ -92,7 +93,7 @@ export function Footer() {
                 </button>
                 <button
                   onClick={() => navigate('/about')}
-                  className="hover:underline text-left md:text-left text-center"
+                  className="hover:underline"
                   style={{
                     fontFamily: 'Inter, sans-serif',
                     fontSize: '16px',
@@ -103,7 +104,7 @@ export function Footer() {
                 </button>
                 <button
                   onClick={() => handleFooterNav('contact')}
-                  className="hover:underline text-left md:text-left text-center"
+                  className="hover:underline"
                   style={{
                     fontFamily: 'Inter, sans-serif',
                     fontSize: '16px',
@@ -129,76 +130,57 @@ export function Footer() {
               >
                 NETWORK
               </h4>
-              <nav className="flex flex-col gap-3 items-center md:items-start">
+              {/* Mobile: horizontal icons only / Desktop: icon + label vertical stack */}
+              <nav className="flex flex-row justify-center gap-5 md:flex-col md:gap-3 md:items-start">
                 <a
                   href="https://github.com/knwar"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline flex items-center gap-2"
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '16px',
-                    color: '#000000'
-                  }}
+                  className="hover:opacity-60 transition-opacity flex items-center gap-2"
+                  aria-label="GitHub"
                 >
-                  <Github size={16} />
-                  GitHub
+                  <Github size={20} className="md:!w-4 md:!h-4" />
+                  <span className="hidden md:inline" style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', color: '#000000' }}>GitHub</span>
                 </a>
                 <a
                   href="https://www.linkedin.com/in/knwar"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline flex items-center gap-2"
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '16px',
-                    color: '#000000'
-                  }}
+                  className="hover:opacity-60 transition-opacity flex items-center gap-2"
+                  aria-label="LinkedIn"
                 >
-                  <Linkedin size={16} />
-                  LinkedIn
+                  <Linkedin size={20} className="md:!w-4 md:!h-4" />
+                  <span className="hidden md:inline" style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', color: '#000000' }}>LinkedIn</span>
                 </a>
                 <a
                   href="https://x.com/knwar_dev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline flex items-center gap-2"
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '16px',
-                    color: '#000000'
-                  }}
+                  className="hover:opacity-60 transition-opacity flex items-center gap-2"
+                  aria-label="Twitter"
                 >
-                  <Twitter size={16} />
-                  Twitter
+                  <Twitter size={20} className="md:!w-4 md:!h-4" />
+                  <span className="hidden md:inline" style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', color: '#000000' }}>Twitter</span>
                 </a>
                 <a
                   href="https://instagram.com/knwar.dev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline flex items-center gap-2"
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '16px',
-                    color: '#000000'
-                  }}
+                  className="hover:opacity-60 transition-opacity flex items-center gap-2"
+                  aria-label="Instagram"
                 >
-                  <Instagram size={16} />
-                  Instagram
+                  <Instagram size={20} className="md:!w-4 md:!h-4" />
+                  <span className="hidden md:inline" style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', color: '#000000' }}>Instagram</span>
                 </a>
                 <a
                   href="https://youtube.com/@Knwar_dev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline flex items-center gap-2"
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '16px',
-                    color: '#000000'
-                  }}
+                  className="hover:opacity-60 transition-opacity flex items-center gap-2"
+                  aria-label="YouTube"
                 >
-                  <Youtube size={16} />
-                  YouTube
+                  <Youtube size={20} className="md:!w-4 md:!h-4" />
+                  <span className="hidden md:inline" style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', color: '#000000' }}>YouTube</span>
                 </a>
               </nav>
             </div>

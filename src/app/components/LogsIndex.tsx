@@ -207,7 +207,7 @@ export function LogsIndex() {
                   </h2>
 
                   {/* Horizontal Scroll Container */}
-                  <div className="overflow-x-auto -mx-4 md:-mx-8 px-4 md:px-8 pb-4">
+                  <div className="overflow-x-auto scrollbar-hide -mx-4 md:-mx-8 px-4 md:px-8 pb-4">
                     <div className="flex gap-4 min-w-max">
                       {/* Recommended Post Cards */}
                       {logEntries.slice(0, 4).map((entry) => (

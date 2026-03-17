@@ -37,7 +37,7 @@ export function ProjectGrid() {
         </h2>
 
         {/* Mobile: Horizontal Scroll */}
-        <div className="md:hidden overflow-x-auto -mx-4 px-4 pb-4">
+        <div className="md:hidden overflow-x-auto scrollbar-hide -mx-4 px-4 pb-4">
           <div className="flex gap-4" style={{ width: 'max-content' }}>
             {projects.map((project) => (
               <Link

@@ -21,25 +21,45 @@ export function Hero() {
     <section
       className="pt-32 pb-16 md:pb-32 px-4 md:px-8 relative overflow-hidden min-h-[85vh] md:min-h-[80vh] flex flex-col justify-center"
       style={{
-        backgroundImage: `url(${herobg}), radial-gradient(circle, #F5F5F5 4px, transparent 4px)`,
-        backgroundSize: 'cover, 32px 32px',
-        backgroundPosition: 'left center, 0 0',
-        backgroundRepeat: 'no-repeat, repeat'
+        backgroundImage: `url(${herobg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'right center',
+        backgroundRepeat: 'no-repeat',
       }}
     >
-      <div className="max-w-[1440px] mx-auto w-full">
+      {/* Unified overlay — gradient from white (text side) to transparent (photo side) */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            linear-gradient(to right, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.85) 35%, rgba(255,255,255,0.5) 60%, rgba(255,255,255,0.15) 80%, transparent 100%),
+            radial-gradient(circle, #F5F5F5 4px, transparent 4px)
+          `,
+          backgroundSize: '100% 100%, 32px 32px',
+        }}
+      />
+      {/* Mobile: stronger overlay so text is readable over the photo */}
+      <div
+        className="absolute inset-0 pointer-events-none md:hidden"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.4) 100%)',
+        }}
+      />
+
+      <div className="max-w-[1440px] mx-auto w-full relative z-10">
         {/* Mobile: Horizontal Scroll Meta Tags */}
-        <div className="md:hidden mb-6 overflow-x-auto whitespace-nowrap pb-2">
+        <div className="md:hidden mb-6 overflow-x-auto scrollbar-hide whitespace-nowrap pb-2">
           <div className="inline-flex gap-4">
             {metaTags.map((tag, index) => (
               <span
                 key={index}
-                className="inline-block px-3 py-1 border border-[#EEEEEE] bg-white/80 backdrop-blur-sm"
+                className="inline-block px-3 py-1 border border-[#DDDDDD] rounded-full"
                 style={{
                   fontFamily: 'JetBrains Mono, monospace',
                   fontSize: '10px',
                   letterSpacing: '0.5px',
-                  color: '#666666'
+                  color: '#555555',
+                  backgroundColor: 'rgba(255,255,255,0.6)',
                 }}
               >
                 {tag}
@@ -49,28 +69,11 @@ export function Hero() {
         </div>
 
         <div className="grid grid-cols-4 md:grid-cols-12 gap-4 md:gap-20 relative">
-          {/* Large background '01' section marker - Hidden on mobile */}
-          <div
-            className="absolute pointer-events-none hidden md:block"
-            style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '200px',
-              fontWeight: 'bold',
-              color: '#000000',
-              opacity: '0.05',
-              lineHeight: '1',
-              top: '-20px',
-              left: '120px',
-              zIndex: 0
-            }}
-          >
-            01
-          </div>
 
           {/* Desktop: Vertical sidebar - Column 1 */}
           <div className="hidden md:block md:col-span-1">
             <div
-              className="transform -rotate-180 origin-left absolute bg-white/50 backdrop-blur-[2px] px-2 py-1"
+              className="transform -rotate-180 origin-left absolute px-2 py-1"
               style={{
                 writingMode: 'vertical-rl',
                 fontFamily: 'JetBrains Mono, monospace',
@@ -78,7 +81,7 @@ export function Hero() {
                 letterSpacing: '0.5px',
                 color: '#666666',
                 top: '80px',
-                left: '32px'
+                left: '32px',
               }}
             >
               LOCATION: PUNJAB, IN // STATUS: ACTIVE // ROLE: FLUTTER & AI
@@ -94,27 +97,29 @@ export function Hero() {
                 fontSize: 'clamp(40px, 8vw, 64px)',
                 lineHeight: '1.1',
                 letterSpacing: '-0.02em',
-                textShadow: '0 4px 20px rgba(255,255,255,0.8)'
               }}
             >
               KNWAR // MOBILE DEV
             </h1>
             <p
-              className="text-base md:text-lg mb-6 max-w-2xl bg-white/60 backdrop-blur-sm p-4 rounded-lg"
+              className="text-base md:text-lg mb-6 max-w-2xl"
               style={{
                 fontFamily: 'Inter, sans-serif',
                 fontSize: 'clamp(16px, 2vw, 18px)',
                 lineHeight: '1.6',
-                color: '#000000'
+                color: '#222222',
               }}
             >
-              Hi, I’m <strong>Knwar</strong> 👋
+              Hi, I'm <strong>Knwar</strong> 👋
               <br />
-              A mobile developer who’s been developing and shipping apps for over 10 years. Explore my portfolio of shipped projects and watch my content on the evolving landscape of programming, tech and AI.
+              A mobile developer who's been developing and shipping apps for over 10 years. Explore my portfolio of shipped projects and watch my content on the evolving landscape of programming, tech and AI.
             </p>
 
             {/* Core Stack Icons */}
-            <div className="flex items-center gap-5 mb-6 bg-white/60 backdrop-blur-sm px-4 py-3 rounded-lg w-fit">
+            <div
+              className="flex items-center gap-5 mb-6 px-4 py-3 rounded-lg w-fit"
+              style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}
+            >
               <span className="font-mono text-[10px] tracking-widest text-gray-500 uppercase">Core Stack</span>
               <div className="w-px h-5 bg-gray-300" />
               {/* Flutter */}
@@ -156,13 +161,13 @@ export function Hero() {
                   fontFamily: 'JetBrains Mono, monospace',
                   fontSize: '12px',
                   borderRadius: '24px',
-                  letterSpacing: '0.5px'
+                  letterSpacing: '0.5px',
                 }}
               >
                 MY PROJECTS ↓
               </button>
 
-              {/* 'HIRE ME' pill button */}
+              {/* 'CONTACT ME' pill button */}
               <button
                 onClick={handleHireMe}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white hover:bg-[#007AFF] transition-colors shadow-lg"
@@ -170,7 +175,7 @@ export function Hero() {
                   fontFamily: 'JetBrains Mono, monospace',
                   fontSize: '12px',
                   borderRadius: '24px',
-                  letterSpacing: '0.5px'
+                  letterSpacing: '0.5px',
                 }}
               >
                 CONTACT ME →

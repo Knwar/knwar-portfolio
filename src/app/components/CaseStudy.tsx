@@ -347,7 +347,7 @@ export function CaseStudy() {
                   Other Projects
                 </h3>
 
-                <div className="flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0">
+                <div className="flex flex-row lg:flex-col gap-4 overflow-x-auto scrollbar-hide lg:overflow-x-visible pb-2 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0">
                   {allProjects
                     .filter((p) => p.slug !== slug)
                     .map((p) => (
