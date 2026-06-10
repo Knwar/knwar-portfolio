@@ -27,26 +27,26 @@ const ptComponents = {
     h2: ({ children }: any) => <h2 className="text-2xl font-bold mt-8 mb-4 font-mono">{children}</h2>,
     h3: ({ children }: any) => <h3 className="text-xl font-bold mt-6 mb-3 font-mono">{children}</h3>,
     h4: ({ children }: any) => <h4 className="text-lg font-bold mt-5 mb-2 font-mono">{children}</h4>,
-    normal: ({ children }: any) => <p className="mb-4 leading-relaxed text-gray-700">{children}</p>,
-    blockquote: ({ children }: any) => <blockquote className="border-l-4 border-black pl-4 italic my-6 text-gray-600">{children}</blockquote>,
+    normal: ({ children }: any) => <p className="mb-4 leading-relaxed text-ink-muted">{children}</p>,
+    blockquote: ({ children }: any) => <blockquote className="border-l-4 border-ink pl-4 italic my-6 text-ink-muted">{children}</blockquote>,
   },
   list: {
-    bullet: ({ children }: any) => <ul className="list-disc pl-6 mb-4 space-y-2 text-gray-700">{children}</ul>,
-    number: ({ children }: any) => <ol className="list-decimal pl-6 mb-4 space-y-2 text-gray-700">{children}</ol>,
+    bullet: ({ children }: any) => <ul className="list-disc pl-6 mb-4 space-y-2 text-ink-muted">{children}</ul>,
+    number: ({ children }: any) => <ol className="list-decimal pl-6 mb-4 space-y-2 text-ink-muted">{children}</ol>,
   },
   listItem: {
     bullet: ({ children }: any) => <li className="leading-relaxed">{children}</li>,
     number: ({ children }: any) => <li className="leading-relaxed">{children}</li>,
   },
   marks: {
-    strong: ({ children }: any) => <strong className="font-semibold text-black">{children}</strong>,
+    strong: ({ children }: any) => <strong className="font-semibold text-ink">{children}</strong>,
     em: ({ children }: any) => <em>{children}</em>,
     link: ({ value, children }: any) => (
       <a
         href={value?.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[#007AFF] underline hover:text-black transition-colors"
+        className="text-brand underline hover:text-ink transition-colors"
       >
         {children}
       </a>
@@ -84,7 +84,7 @@ export function ProjectLegalPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center font-mono">
+      <div className="min-h-screen bg-paper text-ink flex items-center justify-center font-mono">
         Loading...
       </div>
     );
@@ -107,36 +107,27 @@ export function ProjectLegalPage() {
       <header>
         <Navigation />
       </header>
-      <article className="min-h-screen bg-white pt-32 pb-20 px-4 md:px-8">
+      <article className="min-h-screen bg-paper text-ink pt-24 pb-16 px-4 md:px-8">
         <div className="max-w-[800px] mx-auto">
           {/* Back link */}
           <Link
             to={`/project/${slug}`}
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-black mb-8 font-mono"
+            className="inline-flex items-center gap-2 text-xs tracking-wider text-ink-muted hover:text-ink transition-colors mb-6 font-mono"
           >
-            <ArrowLeft size={16} />
+            <ArrowLeft size={14} />
             BACK TO {data.projectTitle?.toUpperCase()}
           </Link>
 
           {/* Title */}
-          <h1
-            className="text-3xl md:text-4xl font-bold mb-2 leading-tight"
-            style={{ fontFamily: 'JetBrains Mono, monospace' }}
-          >
+          <h1 className="font-display uppercase text-3xl md:text-5xl mb-2 leading-[0.95] tracking-tight">
             {pageConfig.title}
           </h1>
-          <p
-            className="text-gray-500 mb-12"
-            style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px' }}
-          >
+          <p className="font-sans text-sm text-ink-muted mb-10 pb-6 border-b border-hairline">
             For {data.projectTitle}
           </p>
 
           {/* Content */}
-          <div
-            className="max-w-none"
-            style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', lineHeight: '1.8' }}
-          >
+          <div className="max-w-none font-sans text-base leading-relaxed">
             <PortableText value={content} components={ptComponents} />
           </div>
         </div>

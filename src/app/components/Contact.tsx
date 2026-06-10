@@ -1,55 +1,59 @@
+import { SectionHeader } from './SectionHeader';
+import { YouTubeCTA } from './YouTubeCTA';
+
 export function Contact() {
   return (
-    <section id="contact" className="py-12 md:py-20 px-4 md:px-8 bg-white">
-      <div className="max-w-[800px] mx-auto">
-        <h2 
-          className="font-bold mb-8 md:mb-12"
-          style={{ 
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: 'clamp(24px, 4vw, 32px)'
-          }}
+    <section id="contact" className="py-8 md:py-12 bg-paper text-ink">
+      <div className="container-page">
+        <SectionHeader index="05" label="Talk" />
+
+        <p className="font-mono text-[11px] tracking-[0.15em] uppercase text-ink-muted mb-6">
+          <span className="inline-block w-1.5 h-1.5 bg-brand mr-2 align-middle" />
+          Booking freelance + consulting — or just come watch me build.
+        </p>
+
+        {/* Giant email */}
+        <a
+          href="mailto:contact@knwar.com"
+          className="block font-display uppercase tracking-tight leading-[0.95] text-[clamp(20px,3.5vw,44px)] break-all hover:text-brand transition-colors mb-10"
         >
-          CONTACT
-        </h2>
-        
-        <div className="space-y-6 md:space-y-8">
-          <p 
-            style={{ 
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 'clamp(16px, 2vw, 18px)',
-              lineHeight: '1.8',
-              color: '#000000'
-            }}
+          contact@knwar.com
+        </a>
+
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-hairline pt-6">
+          <YouTubeCTA />
+          <a
+            href="https://youtube.com/@Knwar_dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs tracking-wider uppercase text-ink-muted hover:text-brand transition-colors"
           >
-            Currently available for freelance projects and consulting opportunities.
-            Let's build something exceptional together.
-          </p>
-          
-          <div className="space-y-4">
-            <div>
-              <p 
-                className="mb-2"
-                style={{ 
-                  fontFamily: 'JetBrains Mono, monospace',
-                  fontSize: '12px',
-                  color: '#666666'
-                }}
-              >
-                EMAIL
-              </p>
-              <a 
-                href="mailto:contact@knwar.com"
-                className="hover:underline break-all"
-                style={{ 
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: 'clamp(16px, 2vw, 18px)',
-                  color: '#007AFF'
-                }}
-              >
-                contact@knwar.com
-              </a>
-            </div>
-          </div>
+            YouTube ↗
+          </a>
+          <a
+            href="https://instagram.com/knwar.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs tracking-wider uppercase text-ink-muted hover:text-brand transition-colors"
+          >
+            Instagram ↗
+          </a>
+          <a
+            href="https://x.com/knwar_dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs tracking-wider uppercase text-ink-muted hover:text-brand transition-colors"
+          >
+            Twitter ↗
+          </a>
+          <a
+            href="https://github.com/knwar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs tracking-wider uppercase text-ink-muted hover:text-brand transition-colors"
+          >
+            GitHub ↗
+          </a>
         </div>
       </div>
     </section>

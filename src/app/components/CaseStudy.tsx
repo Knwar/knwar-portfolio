@@ -26,6 +26,8 @@ interface ProjectDetail {
   mainImage?: any;
   playStoreUrl?: string;
   appStoreUrl?: string;
+  githubUrl?: string;
+  projectUrl?: string;
   gallery?: any[];
   challenge?: {
     title: string;
@@ -121,7 +123,7 @@ export function CaseStudy() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-paper text-ink flex items-center justify-center">
         <p className="font-mono">Loading...</p>
       </div>
     );
@@ -129,7 +131,7 @@ export function CaseStudy() {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-4">
+      <div className="min-h-screen bg-paper text-ink flex flex-col items-center justify-center gap-4">
         <p className="font-mono">Project not found.</p>
         <Link to="/" className="underline font-mono">Back home</Link>
       </div>
@@ -139,7 +141,7 @@ export function CaseStudy() {
   const projectImageUrl = project.mainImage ? urlFor(project.mainImage).width(1200).url() : undefined;
 
   return (
-    <div className="bg-white min-h-screen text-black">
+    <div className="bg-paper min-h-screen text-ink">
       <SEOHead
         title={`${project.title} — Knwar`}
         description={project.tags?.join(', ') || `Case study: ${project.title}`}
@@ -161,38 +163,60 @@ export function CaseStudy() {
         <Navigation />
       </header>
 
-      <main className="pt-32 pb-20">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-8">
+      <main className="pt-24 pb-16">
+        <div className="container-page">
           {/* Header */}
-          <div className="mb-20">
-            <h1
-              className="font-bold mb-8"
-              style={{
-                fontFamily: 'JetBrains Mono, monospace',
-                fontSize: 'clamp(32px, 6vw, 64px)',
-                lineHeight: '1.1'
-              }}
+          <div className="mb-12">
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 font-mono text-xs tracking-wider text-ink-muted hover:text-ink transition-colors mb-6"
             >
+              ← INDEX / PROJECTS
+            </Link>
+            <h1 className="font-display uppercase text-[clamp(36px,7vw,90px)] leading-[0.95] tracking-tight mb-8">
               {project.title}
             </h1>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-black pt-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 border-t border-b border-hairline py-5">
               <div>
-                <h3 className="font-mono text-xs text-gray-500 mb-2">PLATFORM</h3>
+                <h3 className="font-mono text-[10px] tracking-[0.1em] text-ink-muted uppercase mb-2">Platform</h3>
                 <p className="font-mono text-sm">{project.platform || 'N/A'}</p>
               </div>
               <div>
-                <h3 className="font-mono text-xs text-gray-500 mb-2">TECH STACK</h3>
+                <h3 className="font-mono text-[10px] tracking-[0.1em] text-ink-muted uppercase mb-2">Tech Stack</h3>
                 <p className="font-mono text-sm">{project.tags?.join(' // ') || 'N/A'}</p>
               </div>
+              {project.publishedAt && (
+                <div>
+                  <h3 className="font-mono text-[10px] tracking-[0.1em] text-ink-muted uppercase mb-2">Year</h3>
+                  <p className="font-mono text-sm">{new Date(project.publishedAt).getFullYear()}</p>
+                </div>
+              )}
+              {(project.githubUrl || project.projectUrl) && (
+                <div>
+                  <h3 className="font-mono text-[10px] tracking-[0.1em] text-ink-muted uppercase mb-2">Links</h3>
+                  <div className="flex flex-col gap-1">
+                    {project.projectUrl && (
+                      <a href={project.projectUrl} target="_blank" rel="noopener noreferrer" className="font-mono text-sm hover:text-brand transition-colors">
+                        LIVE ↗
+                      </a>
+                    )}
+                    {project.githubUrl && (
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="font-mono text-sm hover:text-brand transition-colors">
+                        GITHUB ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
               {project.playStoreUrl && (
                 <div>
-                  <h3 className="font-mono text-xs text-gray-500 mb-2">GOOGLE PLAY</h3>
+                  <h3 className="font-mono text-[10px] tracking-[0.1em] text-ink-muted uppercase mb-2">Google Play</h3>
                   <a
                     href={project.playStoreUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-mono text-sm bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+                    className="inline-flex items-center gap-2 font-mono text-sm bg-ink text-paper px-4 py-2 hover:bg-brand hover:text-white transition-colors"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 0 1 0 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z" />
@@ -203,12 +227,12 @@ export function CaseStudy() {
               )}
               {project.appStoreUrl && (
                 <div>
-                  <h3 className="font-mono text-xs text-gray-500 mb-2">APP STORE</h3>
+                  <h3 className="font-mono text-[10px] tracking-[0.1em] text-ink-muted uppercase mb-2">App Store</h3>
                   <a
                     href={project.appStoreUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-mono text-sm bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+                    className="inline-flex items-center gap-2 font-mono text-sm bg-ink text-paper px-4 py-2 hover:bg-brand hover:text-white transition-colors"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M11.624 7.222c-.876 0-2.232-.996-3.66-.984-1.884.012-3.612 1.092-4.584 2.784-1.956 3.396-.504 8.412 1.404 11.172.936 1.344 2.04 2.856 3.504 2.808 1.404-.06 1.932-.912 3.636-.912 1.692 0 2.172.912 3.66.876 1.512-.024 2.472-1.368 3.396-2.724 1.068-1.56 1.512-3.072 1.536-3.156-.036-.012-2.94-1.128-2.976-4.488-.024-2.808 2.292-4.152 2.4-4.212-1.308-1.932-3.348-2.148-4.08-2.196-1.848-.144-3.396 1.008-4.236 1.008zm3.12-2.832c.78-.936 1.296-2.244 1.152-3.54-1.116.048-2.46.744-3.264 1.68-.708.828-1.332 2.16-1.164 3.432 1.236.096 2.508-.636 3.276-1.572z" />
@@ -221,8 +245,8 @@ export function CaseStudy() {
           </div>
 
           {/* Gallery — App Store Style Horizontal Carousel */}
-          <div className="mb-20">
-            <h3 className="font-mono text-xs text-gray-500 mb-6 uppercase tracking-wider">Preview</h3>
+          <div className="mb-12">
+            <h3 className="font-mono text-[10px] tracking-[0.1em] text-ink-muted uppercase mb-5">Preview</h3>
             {project.gallery && project.gallery.length > 0 ? (
               <div className="relative">
                 <Carousel
@@ -244,24 +268,13 @@ export function CaseStudy() {
                           onClick={() => openLightbox(i)}
                           className="block w-full group cursor-zoom-in focus:outline-none"
                         >
-                          <div className="relative overflow-hidden rounded-2xl bg-gray-100 shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.01]">
+                          <div className="relative overflow-hidden border border-hairline bg-paper-2 transition-colors duration-300 group-hover:border-ink">
                             <img
                               src={urlFor(img).width(540).quality(85).url()}
                               alt={`${project.title} screenshot ${i + 1}`}
-                              className="w-full h-auto object-contain aspect-[9/20] transition-transform duration-500 group-hover:scale-[1.03]"
+                              className="w-full h-auto object-contain aspect-[9/20]"
                               loading={i === 0 ? 'eager' : 'lazy'}
                             />
-                            {/* Subtle gradient overlay on hover */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            {/* Expand icon hint */}
-                            <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 shadow-sm">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <polyline points="15 3 21 3 21 9" />
-                                <polyline points="9 21 3 21 3 15" />
-                                <line x1="21" y1="3" x2="14" y2="10" />
-                                <line x1="3" y1="21" x2="10" y2="14" />
-                              </svg>
-                            </div>
                           </div>
                         </button>
                       </CarouselItem>
@@ -269,20 +282,20 @@ export function CaseStudy() {
                   </CarouselContent>
 
                   {/* Navigation arrows — positioned outside the carousel */}
-                  <CarouselPrevious className="hidden md:inline-flex -left-5 size-10 border-gray-200 bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white hover:shadow-xl transition-all" />
-                  <CarouselNext className="hidden md:inline-flex -right-5 size-10 border-gray-200 bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white hover:shadow-xl transition-all" />
+                  <CarouselPrevious className="hidden md:inline-flex -left-5 size-10 rounded-none border-hairline bg-paper shadow-none hover:bg-ink hover:text-paper transition-colors" />
+                  <CarouselNext className="hidden md:inline-flex -right-5 size-10 rounded-none border-hairline bg-paper shadow-none hover:bg-ink hover:text-paper transition-colors" />
                 </Carousel>
 
                 {/* Dot indicators */}
                 {slideCount > 1 && (
-                  <div className="flex justify-center gap-1.5 mt-6">
+                  <div className="flex justify-center gap-1.5 mt-5">
                     {Array.from({ length: slideCount }).map((_, i) => (
                       <button
                         key={i}
                         onClick={() => carouselApi?.scrollTo(i)}
-                        className={`rounded-full transition-all duration-300 ${i === currentSlide
-                          ? 'w-6 h-2 bg-black'
-                          : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'
+                        className={`transition-all duration-300 ${i === currentSlide
+                          ? 'w-6 h-1.5 bg-ink'
+                          : 'w-1.5 h-1.5 bg-hairline hover:bg-ink-faint'
                           }`}
                         aria-label={`Go to slide ${i + 1}`}
                       />
@@ -291,13 +304,13 @@ export function CaseStudy() {
                 )}
 
                 {/* Slide counter */}
-                <p className="text-center font-mono text-xs text-gray-400 mt-3">
+                <p className="text-center font-mono text-xs text-ink-faint mt-3">
                   {currentSlide + 1} / {project.gallery.length}
                 </p>
               </div>
             ) : (
-              <div className="w-full aspect-video bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 flex items-center justify-center">
-                <p className="font-mono text-gray-400">No Gallery Images</p>
+              <div className="w-full aspect-video bg-paper-2 border border-dashed border-hairline flex items-center justify-center">
+                <p className="font-mono text-ink-faint">No Gallery Images</p>
               </div>
             )}
           </div>
@@ -308,19 +321,19 @@ export function CaseStudy() {
             {/* Left Column — Main Content (80%) */}
             <div className="flex-1 lg:w-[80%] min-w-0">
               {/* Challenge & Solution */}
-              <div className="grid md:grid-cols-2 gap-20 mb-20">
+              <div className="grid md:grid-cols-2 gap-8 md:gap-12 mb-12 border-t border-hairline pt-6">
                 {project.challenge && (
                   <div>
-                    <h3 className="font-mono text-xs text-gray-500 mb-4 uppercase">CRITICAL FRICTION POINT</h3>
-                    <h4 className="font-bold font-mono text-xl mb-4">{project.challenge.title}</h4>
-                    <p className="font-sans leading-relaxed text-gray-800">{project.challenge.description}</p>
+                    <h3 className="font-mono text-[10px] tracking-[0.1em] text-ink-muted uppercase mb-3">Critical Friction Point</h3>
+                    <h4 className="font-bold font-mono text-xl mb-3">{project.challenge.title}</h4>
+                    <p className="font-sans leading-relaxed text-ink">{project.challenge.description}</p>
                   </div>
                 )}
                 {project.solution && (
-                  <div>
-                    <h3 className="font-mono text-xs text-gray-500 mb-4 uppercase">ENGINEERED SOLUTION</h3>
-                    <h4 className="font-bold font-mono text-xl mb-4">{project.solution.title}</h4>
-                    <p className="font-sans leading-relaxed text-gray-800">{project.solution.description}</p>
+                  <div className="md:border-l md:border-hairline md:pl-8 lg:pl-12">
+                    <h3 className="font-mono text-[10px] tracking-[0.1em] text-ink-muted uppercase mb-3">Engineered Solution</h3>
+                    <h4 className="font-bold font-mono text-xl mb-3">{project.solution.title}</h4>
+                    <p className="font-sans leading-relaxed text-ink">{project.solution.description}</p>
                   </div>
                 )}
               </div>
@@ -333,86 +346,27 @@ export function CaseStudy() {
               )}
             </div>
 
-            {/* Right Column — Other Projects Sidebar (20%) */}
+            {/* Right Column — Other Projects index list (20%) */}
             <aside className="lg:w-[20%] flex-shrink-0">
               <div className="lg:sticky lg:top-32">
-                <h3
-                  className="font-bold mb-6 uppercase tracking-wider"
-                  style={{
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '12px',
-                    color: '#999',
-                  }}
-                >
+                <h3 className="font-mono text-[10px] tracking-[0.1em] text-ink-muted uppercase mb-4">
                   Other Projects
                 </h3>
 
-                <div className="flex flex-row lg:flex-col gap-4 overflow-x-auto scrollbar-hide lg:overflow-x-visible pb-2 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0">
+                <div className="border-t border-hairline">
                   {allProjects
                     .filter((p) => p.slug !== slug)
-                    .map((p) => (
+                    .map((p, i) => (
                       <Link
                         key={p._id}
                         to={`/project/${p.slug}`}
-                        className="block group flex-shrink-0"
-                        style={{ width: '180px', minWidth: '180px' }}
+                        className="flex items-baseline justify-between gap-3 border-b border-hairline py-2.5 font-mono text-xs group hover:text-brand transition-colors"
                       >
-                        <div
-                          className="rounded-xl overflow-hidden shadow-sm transition-all duration-300 group-hover:shadow-md group-hover:-translate-y-0.5"
-                          style={{ backgroundColor: p.color || '#F5F5F5' }}
-                        >
-                          {/* Image */}
-                          <div
-                            className="w-full relative"
-                            style={{ aspectRatio: '4 / 5' }}
-                          >
-                            {p.mainImage && (
-                              <img
-                                src={urlFor(p.mainImage).width(360).url()}
-                                alt={p.title}
-                                className="w-full h-full object-cover"
-                                loading="lazy"
-                              />
-                            )}
-                          </div>
-
-                          {/* Info */}
-                          <div className="p-3 bg-white">
-                            <h4
-                              className="font-bold mb-0.5 transition-colors duration-200 group-hover:text-[#007AFF] truncate"
-                              style={{
-                                fontFamily: 'JetBrains Mono, monospace',
-                                fontSize: '11px',
-                              }}
-                            >
-                              {p.title}
-                            </h4>
-                            <p
-                              className="line-clamp-2"
-                              style={{
-                                fontFamily: 'Inter, sans-serif',
-                                fontSize: '10px',
-                                color: '#999',
-                                lineHeight: '1.4',
-                              }}
-                            >
-                              {p.summary || p.tags?.join(' · ')}
-                            </p>
-                            <span
-                              className="inline-flex items-center gap-0.5 font-medium mt-1.5 transition-all duration-200 group-hover:gap-1.5"
-                              style={{
-                                fontFamily: 'Inter, sans-serif',
-                                fontSize: '10px',
-                                color: '#007AFF',
-                              }}
-                            >
-                              View Project
-                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                              </svg>
-                            </span>
-                          </div>
-                        </div>
+                        <span className="truncate">
+                          <span className="text-ink-faint mr-2">{String(i + 1).padStart(2, '0')}</span>
+                          {p.title}
+                        </span>
+                        <span className="flex-shrink-0">↗</span>
                       </Link>
                     ))}
                 </div>
@@ -466,7 +420,7 @@ export function CaseStudy() {
             <img
               src={urlFor(project.gallery[lightboxIndex]).width(1600).quality(90).url()}
               alt={`${project.title} screenshot ${lightboxIndex + 1}`}
-              className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl animate-[fadeIn_0.2s_ease-out]"
+              className="max-w-full max-h-[85vh] object-contain shadow-2xl animate-[fadeIn_0.2s_ease-out]"
             />
           </div>
 

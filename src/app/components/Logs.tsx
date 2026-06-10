@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { ArrowUpRight } from 'lucide-react';
 import { client } from '../../sanity/client';
 import { POSTS_QUERY } from '../../sanity/queries';
 import { Link } from 'react-router-dom';
+import { SectionHeader } from './SectionHeader';
 
 interface LogEntry {
   _id: string;
@@ -19,7 +19,6 @@ export function Logs() {
   useEffect(() => {
     client.fetch(POSTS_QUERY)
       .then((data) => {
-        // Map Sanity data to component state if needed, or use directly
         const mappedLogs = data.map((post: any) => ({
           _id: post._id,
           date: post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-CA').replace(/-/g, '.') : '',
@@ -34,71 +33,43 @@ export function Logs() {
   }, []);
 
   return (
-    <section id="logs" className="py-12 md:py-20 px-4 md:px-8 bg-white">
-      <div className="max-w-[800px] mx-auto">
-        <h2
-          className="font-bold mb-8 md:mb-12"
-          style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: 'clamp(24px, 4vw, 32px)'
-          }}
-        >
-          LOGS
-        </h2>
-
-        <div className="space-y-6 md:space-y-0">
-          {logs.map((log) => (
-            <Link
-              key={log._id}
-              to={`/log/${log.slug}`}
-              className="block md:grid md:grid-cols-12 gap-4 md:items-center group border-b md:border-b-0 border-[#EEEEEE] pb-6 md:pb-0 cursor-pointer"
-              style={{ paddingTop: '24px', paddingBottom: '24px' }}
-            >
-              {/* Mobile: Date Above Title */}
-              <div className="mb-2 md:mb-0 md:col-span-2">
-                <span
-                  style={{
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '12px',
-                    color: '#666666'
-                  }}
-                >
-                  {log.date}
-                </span>
-              </div>
-
-              {/* Title */}
-              <div className="mb-3 md:mb-0 md:col-span-8">
-                <h3
-                  className="flex items-center gap-2 group-hover:underline"
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: 'clamp(16px, 2.5vw, 20px)',
-                    fontWeight: '500'
-                  }}
-                >
-                  {log.title}
-                  <ArrowUpRight size={12} className="opacity-50 flex-shrink-0" />
-                </h3>
-              </div>
-
-              {/* Tag */}
-              <div className="md:col-span-2 flex md:justify-end">
-                <span
-                  className="px-3 py-1 border border-black"
-                  style={{
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '10px',
-                    borderRadius: '12px',
-                    letterSpacing: '0.5px'
-                  }}
-                >
-                  {log.type}
-                </span>
-              </div>
+    <section id="logs" className="py-8 md:py-12 bg-paper text-ink">
+      <div className="container-page">
+        <SectionHeader
+          index="02"
+          label="Logs"
+          count={logs.length}
+          action={
+            <Link to="/logs" className="font-mono text-[11px] tracking-[0.15em] uppercase hover:text-brand transition-colors">
+              View all →
             </Link>
-          ))}
-        </div>
+          }
+        />
+      </div>
+
+      {/* Full-bleed inverting rows */}
+      <div className="border-t border-hairline">
+        {logs.slice(0, 6).map((log) => (
+          <Link
+            key={log._id}
+            to={`/log/${log.slug}`}
+            className="block border-b border-hairline group hover:bg-ink hover:text-paper transition-colors duration-200"
+          >
+            <div className="container-page py-5 md:py-6 grid md:grid-cols-12 md:gap-6 md:items-baseline">
+              <span className="md:col-span-2 font-mono text-xs text-ink-muted group-hover:text-paper/60 transition-colors">
+                {log.date}
+              </span>
+              <h3 className="md:col-span-8 font-display uppercase tracking-tight leading-tight text-[clamp(20px,3.5vw,40px)] mt-1 md:mt-0">
+                {log.title}
+              </h3>
+              <span className="md:col-span-2 md:text-right font-mono text-[11px] tracking-[0.15em] uppercase mt-2 md:mt-0">
+                <span className={log.type === 'VIDEO' ? 'text-brand' : 'text-ink-muted group-hover:text-paper/60 transition-colors'}>
+                  {log.type === 'VIDEO' ? '▶ ' : ''}{log.type}
+                </span>
+              </span>
+            </div>
+          </Link>
+        ))}
       </div>
     </section>
   );

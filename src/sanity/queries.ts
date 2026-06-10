@@ -6,7 +6,10 @@ export const PROJECTS_QUERY = `*[_type == "project"] | order(publishedAt desc) {
   tags,
   mainImage,
   color,
-  publishedAt
+  publishedAt,
+  platform,
+  githubUrl,
+  projectUrl
 }`;
 
 export const PROJECT_BY_SLUG_QUERY = `*[_type == "project" && slug.current == $slug][0] {

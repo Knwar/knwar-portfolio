@@ -13,6 +13,7 @@ import { LogDetail } from './components/LogDetail';
 import { LogsIndex } from './components/LogsIndex';
 import { AboutPage } from './components/AboutPage';
 import { NotFound } from './components/NotFound';
+import { ProjectsIndex } from './components/ProjectsIndex';
 import { ProjectLegalPage } from './components/ProjectLegalPage';
 import { SEOHead } from './components/SEOHead';
 import { StructuredData, homepageSchema } from './components/StructuredData';
@@ -58,6 +59,7 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/projects" element={<ProjectsIndex />} />
         <Route path="/project/:slug" element={<CaseStudy />} />
         <Route path="/project/:slug/:pageType" element={<ProjectLegalPage />} />
         <Route path="/log/:slug" element={<LogDetail />} />

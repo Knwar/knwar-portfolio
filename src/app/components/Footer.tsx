@@ -1,6 +1,14 @@
 import { ArrowUp, Github, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+const socials = [
+  { label: 'GitHub', href: 'https://github.com/knwar', Icon: Github },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/knwar', Icon: Linkedin },
+  { label: 'Twitter', href: 'https://x.com/knwar_dev', Icon: Twitter },
+  { label: 'Instagram', href: 'https://instagram.com/knwar.dev', Icon: Instagram },
+  { label: 'YouTube', href: 'https://youtube.com/@Knwar_dev', Icon: Youtube },
+];
+
 export function Footer() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,225 +28,104 @@ export function Footer() {
     }
   };
 
+  const indexLinks = [
+    { label: 'Projects', onClick: () => navigate('/projects') },
+    { label: 'Logs', onClick: () => navigate('/logs') },
+    { label: 'About', onClick: () => navigate('/about') },
+    { label: 'Contact', onClick: () => handleFooterNav('contact') },
+  ];
+
   return (
-    <footer className="bg-[#FAFAFA] border-t border-[#EEEEEE]" style={{ borderWidth: '1px' }}>
-      <div className="max-w-[1440px] mx-auto px-4 md:px-8">
-        {/* Mobile: Single Stack / Desktop: 4-Column Layout */}
-        <div className="pt-12 md:pt-20">
-          {/* Logo & Tag - Mobile centered with 48px bottom margin */}
-          <div className="text-center md:text-left mb-12 md:mb-0">
-            <div
-              className="font-bold mb-3"
-              style={{
-                fontFamily: 'JetBrains Mono, monospace',
-                fontSize: '24px'
-              }}
-            >
-              K.
+    <footer className="bg-paper text-ink">
+      {/* Giant inverting YouTube banner */}
+      <a
+        href="https://youtube.com/@Knwar_dev?sub_confirmation=1"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block border-y border-hairline group hover:bg-brand transition-colors duration-200"
+      >
+        <div className="container-page py-8 md:py-12 flex items-center justify-between gap-6">
+          <span className="font-display uppercase tracking-tight leading-[0.9] text-[clamp(28px,6vw,88px)] group-hover:text-white transition-colors">
+            Watch me build
+          </span>
+          <span className="font-display text-[clamp(28px,6vw,88px)] leading-none text-brand group-hover:text-white transition-colors">
+            ▶
+          </span>
+        </div>
+      </a>
+
+      <div className="container-page">
+        <div className="pt-10 md:pt-12 grid grid-cols-1 md:grid-cols-4 md:gap-12">
+          {/* Logo & Tag */}
+          <div className="text-center md:text-left mb-8 md:mb-0">
+            <div className="font-display text-2xl uppercase tracking-tight mb-2">
+              K<span className="text-brand">.</span>
             </div>
-            <p
-              style={{
-                fontFamily: 'JetBrains Mono, monospace',
-                fontSize: '10px',
-                color: '#666666',
-                letterSpacing: '0.5px'
-              }}
-            >
-              ENGINEERED IN PUNJAB, IN
+            <p className="font-mono text-[10px] tracking-[0.15em] uppercase text-ink-muted">
+              Engineered in Punjab, IN
             </p>
           </div>
 
-          {/* Mobile: Vertical Stack with 40px gaps / Desktop: Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-4 md:gap-20">
-            {/* Desktop Col 1 spacer (logo already positioned above on mobile) */}
-            <div className="hidden md:block" />
+          {/* Index */}
+          <div className="text-center md:text-left mb-8 md:mb-0">
+            <h4 className="font-mono text-[10px] tracking-[0.15em] text-ink-faint uppercase mb-3">Index</h4>
+            <nav className="flex flex-row flex-wrap justify-center gap-x-6 gap-y-2 md:flex-col md:gap-2.5 md:justify-start">
+              {indexLinks.map(({ label, onClick }) => (
+                <button
+                  key={label}
+                  onClick={onClick}
+                  className="font-mono text-xs uppercase tracking-wider text-ink hover:text-brand transition-colors text-center md:text-left"
+                >
+                  {label}
+                </button>
+              ))}
+            </nav>
+          </div>
 
-            {/* Col 2: Index */}
-            <div className="text-center md:text-left mb-10 md:mb-0">
-              <h4
-                className="mb-3"
-                style={{
-                  fontFamily: 'JetBrains Mono, monospace',
-                  fontSize: '10px',
-                  letterSpacing: '0.1em',
-                  color: '#000000',
-                  textTransform: 'uppercase'
-                }}
-              >
-                INDEX
-              </h4>
-              {/* Mobile: horizontal row / Desktop: vertical stack */}
-              <nav className="flex flex-row flex-wrap justify-center gap-x-6 gap-y-2 md:flex-col md:gap-3 md:justify-start">
-                <button
-                  onClick={() => handleFooterNav('projects')}
-                  className="hover:underline"
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '16px',
-                    color: '#000000'
-                  }}
+          {/* Network */}
+          <div className="text-center md:text-left mb-8 md:mb-0">
+            <h4 className="font-mono text-[10px] tracking-[0.15em] text-ink-faint uppercase mb-3">Network</h4>
+            <nav className="flex flex-row justify-center gap-5 md:flex-col md:gap-2.5 md:items-start">
+              {socials.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-brand transition-colors flex items-center gap-2"
+                  aria-label={label}
                 >
-                  Projects
-                </button>
-                <button
-                  onClick={() => navigate('/logs')}
-                  className="hover:underline"
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '16px',
-                    color: '#000000'
-                  }}
-                >
-                  Logs
-                </button>
-                <button
-                  onClick={() => navigate('/about')}
-                  className="hover:underline"
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '16px',
-                    color: '#000000'
-                  }}
-                >
-                  About
-                </button>
-                <button
-                  onClick={() => handleFooterNav('contact')}
-                  className="hover:underline"
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '16px',
-                    color: '#000000'
-                  }}
-                >
-                  Contact
-                </button>
-              </nav>
-            </div>
+                  <Icon size={20} className="md:!w-4 md:!h-4" />
+                  <span className="hidden md:inline font-mono text-xs uppercase tracking-wider">{label}</span>
+                </a>
+              ))}
+            </nav>
+          </div>
 
-            {/* Col 3: Network */}
-            <div className="text-center md:text-left mb-10 md:mb-0">
-              <h4
-                className="mb-3"
-                style={{
-                  fontFamily: 'JetBrains Mono, monospace',
-                  fontSize: '10px',
-                  letterSpacing: '0.1em',
-                  color: '#000000',
-                  textTransform: 'uppercase'
-                }}
+          {/* Contact */}
+          <div className="text-center md:text-left">
+            <h4 className="font-mono text-[10px] tracking-[0.15em] text-ink-faint uppercase mb-3">Contact</h4>
+            <div className="flex flex-col gap-2.5 items-center md:items-start">
+              <a
+                href="mailto:contact@knwar.com"
+                className="font-mono text-xs tracking-wider text-brand hover:underline break-all"
               >
-                NETWORK
-              </h4>
-              {/* Mobile: horizontal icons only / Desktop: icon + label vertical stack */}
-              <nav className="flex flex-row justify-center gap-5 md:flex-col md:gap-3 md:items-start">
-                <a
-                  href="https://github.com/knwar"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:opacity-60 transition-opacity flex items-center gap-2"
-                  aria-label="GitHub"
-                >
-                  <Github size={20} className="md:!w-4 md:!h-4" />
-                  <span className="hidden md:inline" style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', color: '#000000' }}>GitHub</span>
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/knwar"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:opacity-60 transition-opacity flex items-center gap-2"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin size={20} className="md:!w-4 md:!h-4" />
-                  <span className="hidden md:inline" style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', color: '#000000' }}>LinkedIn</span>
-                </a>
-                <a
-                  href="https://x.com/knwar_dev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:opacity-60 transition-opacity flex items-center gap-2"
-                  aria-label="Twitter"
-                >
-                  <Twitter size={20} className="md:!w-4 md:!h-4" />
-                  <span className="hidden md:inline" style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', color: '#000000' }}>Twitter</span>
-                </a>
-                <a
-                  href="https://instagram.com/knwar.dev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:opacity-60 transition-opacity flex items-center gap-2"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={20} className="md:!w-4 md:!h-4" />
-                  <span className="hidden md:inline" style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', color: '#000000' }}>Instagram</span>
-                </a>
-                <a
-                  href="https://youtube.com/@Knwar_dev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:opacity-60 transition-opacity flex items-center gap-2"
-                  aria-label="YouTube"
-                >
-                  <Youtube size={20} className="md:!w-4 md:!h-4" />
-                  <span className="hidden md:inline" style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', color: '#000000' }}>YouTube</span>
-                </a>
-              </nav>
-            </div>
-
-            {/* Col 4: Contact */}
-            <div className="text-center md:text-left">
-              <h4
-                className="mb-3"
-                style={{
-                  fontFamily: 'JetBrains Mono, monospace',
-                  fontSize: '10px',
-                  letterSpacing: '0.1em',
-                  color: '#000000',
-                  textTransform: 'uppercase'
-                }}
+                contact@knwar.com
+              </a>
+              <button
+                onClick={scrollToTop}
+                className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-ink hover:text-brand transition-colors"
               >
-                CONTACT
-              </h4>
-              <div className="flex flex-col gap-3 items-center md:items-start">
-                <a
-                  href="mailto:contact@knwar.com"
-                  className="hover:underline break-all"
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '16px',
-                    color: '#007AFF'
-                  }}
-                >
-                  contact@knwar.com
-                </a>
-                <button
-                  onClick={scrollToTop}
-                  className="flex items-center gap-2 hover:underline"
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '16px',
-                    color: '#000000'
-                  }}
-                >
-                  Back to Top <ArrowUp size={16} />
-                </button>
-              </div>
+                Back to top <ArrowUp size={14} />
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar - Copyright */}
-        <div className="border-t border-[#EEEEEE] mt-12 md:mt-16 pt-6 md:pt-8" style={{ paddingBottom: '32px' }}>
-          <p
-            className="text-center"
-            style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '10px',
-              color: '#666666',
-              letterSpacing: '0.5px'
-            }}
-          >
-            © 2026 KNWAR — ALL SYSTEMS OPERATIONAL
+        {/* Bottom Bar */}
+        <div className="border-t border-hairline mt-10 pt-5 pb-6">
+          <p className="text-center font-mono text-[10px] tracking-[0.15em] uppercase text-ink-muted">
+            © 2026 Knwar — <span className="inline-block w-1.5 h-1.5 bg-brand align-middle mr-1" />All systems operational
           </p>
         </div>
       </div>

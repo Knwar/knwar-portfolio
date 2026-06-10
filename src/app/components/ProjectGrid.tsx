@@ -2,20 +2,90 @@ import { useState, useEffect } from 'react';
 import { client, urlFor } from '../../sanity/client';
 import { PROJECTS_QUERY } from '../../sanity/queries';
 import { Link } from 'react-router-dom';
+import { SectionHeader } from './SectionHeader';
 
-interface Project {
+export interface Project {
   _id: string;
   title: string;
   slug: string;
   summary: string;
   tags: string[];
   mainImage: any;
-  color: string;
+  publishedAt?: string;
+  platform?: string;
+  githubUrl?: string;
+}
+
+export function ProjectCard({ project, index, className = '' }: { project: Project; index: number; className?: string }) {
+  const number = String(index + 1).padStart(2, '0');
+  const year = project.publishedAt ? new Date(project.publishedAt).getFullYear() : null;
+  const meta = [year, project.platform].filter(Boolean).join(' // ');
+
+  return (
+    <div className={`relative group border border-hairline bg-paper ${className}`}>
+      {/* Stretched link covers the card; GITHUB anchor sits above it */}
+      <Link
+        to={`/project/${project.slug}`}
+        className="absolute inset-0 z-[1]"
+        aria-label={project.title}
+      />
+
+      {/* Image with ghost index number */}
+      <div className="relative border-b border-hairline overflow-hidden" style={{ aspectRatio: '4 / 3' }}>
+        {project.mainImage && (
+          <img
+            src={urlFor(project.mainImage).width(900).height(675).url()}
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            loading={index === 0 ? 'eager' : 'lazy'}
+          />
+        )}
+        <span
+          aria-hidden
+          className="pointer-events-none select-none absolute -bottom-3 right-2 font-display leading-none text-[clamp(56px,5vw,84px)] text-paper mix-blend-difference opacity-80"
+        >
+          {number}
+        </span>
+      </div>
+
+      {/* Info */}
+      <div className="p-4 md:p-5">
+        <p className="font-mono text-[10px] tracking-[0.15em] text-ink-muted uppercase mb-1.5">
+          {number}{meta && ` // ${meta}`}
+        </p>
+        <h3 className="font-display uppercase tracking-tight leading-[0.95] text-[clamp(20px,1.8vw,26px)] mb-2.5 transition-colors duration-200 group-hover:text-brand">
+          {project.title}
+        </h3>
+        {project.summary && (
+          <p className="font-sans text-sm text-ink-muted leading-relaxed mb-3 line-clamp-2">
+            {project.summary}
+          </p>
+        )}
+        {project.tags && project.tags.length > 0 && (
+          <p className="font-mono text-[11px] tracking-wider text-ink-faint uppercase mb-4 line-clamp-1">
+            {project.tags.join(' · ')}
+          </p>
+        )}
+        <span className="flex items-center gap-5 font-mono text-xs tracking-wider uppercase">
+          <span className="group-hover:text-brand transition-colors">View case →</span>
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative z-[2] text-ink-muted hover:text-brand transition-colors"
+            >
+              GitHub ↗
+            </a>
+          )}
+        </span>
+      </div>
+    </div>
+  );
 }
 
 export function ProjectGrid() {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   useEffect(() => {
     client.fetch(PROJECTS_QUERY)
@@ -24,159 +94,34 @@ export function ProjectGrid() {
   }, []);
 
   return (
-    <section id="projects" className="py-12 md:py-20 px-4 md:px-8 bg-white">
-      <div className="max-w-[1440px] mx-auto">
-        <h2
-          className="font-bold mb-8 md:mb-12"
-          style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: 'clamp(24px, 4vw, 32px)'
-          }}
-        >
-          PROJECT PORTFOLIO
-        </h2>
+    <section id="projects" className="py-8 md:py-12 bg-paper text-ink">
+      <div className="container-page">
+        <SectionHeader
+          index="01"
+          label="Selected Work"
+          count={projects.length}
+          action={
+            <Link
+              to="/projects"
+              className="font-mono text-[11px] tracking-[0.15em] uppercase hover:text-brand transition-colors"
+            >
+              All Projects →
+            </Link>
+          }
+        />
 
-        {/* Mobile: Horizontal Scroll */}
-        <div className="md:hidden overflow-x-auto scrollbar-hide -mx-4 px-4 pb-4">
-          <div className="flex gap-4" style={{ width: 'max-content' }}>
-            {projects.map((project) => (
-              <Link
+        {/* Horizontal rail — 3 cards visible on desktop */}
+        <div className="overflow-x-auto scrollbar-hide snap-x snap-mandatory -mx-4 px-4 md:-mx-8 md:px-8 pb-2">
+          <div className="flex gap-8">
+            {projects.map((project, i) => (
+              <ProjectCard
                 key={project._id}
-                to={`/project/${project.slug}`}
-                className="block cursor-pointer group"
-                style={{ width: '280px', flexShrink: 0 }}
-                onTouchStart={() => setHoveredId(project._id)}
-                onTouchEnd={() => setHoveredId(null)}
-              >
-                {/* Card — rounded corners wrap entire card */}
-                <div
-                  className="rounded-2xl overflow-hidden shadow-md transition-all duration-300"
-                  style={{ backgroundColor: project.color || '#F5F5F5' }}
-                >
-                  {/* Image */}
-                  <div
-                    className="w-full relative"
-                    style={{ aspectRatio: '4 / 5' }}
-                  >
-                    {project.mainImage && (
-                      <img
-                        src={urlFor(project.mainImage).width(600).url()}
-                        alt={project.title}
-                        className="w-full h-full object-cover"
-                      />
-                    )}
-                  </div>
-
-                  {/* Project info — inside card */}
-                  <div className="p-4 bg-white">
-                    <h3
-                      className="font-bold mb-1"
-                      style={{
-                        fontFamily: 'JetBrains Mono, monospace',
-                        fontSize: '15px'
-                      }}
-                    >
-                      {project.title}
-                    </h3>
-                    <p
-                      className="mb-2"
-                      style={{
-                        fontFamily: 'Inter, sans-serif',
-                        fontSize: '12px',
-                        color: '#888888',
-                        lineHeight: '1.4'
-                      }}
-                    >
-                      {project.summary || project.tags?.join(' · ')}
-                    </p>
-                    <span
-                      className="inline-flex items-center gap-1 font-medium"
-                      style={{
-                        fontFamily: 'Inter, sans-serif',
-                        fontSize: '13px',
-                        color: '#007AFF'
-                      }}
-                    >
-                      View Project
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-              </Link>
+                project={project}
+                index={i}
+                className="snap-start flex-none w-[85%] sm:w-[60%] md:w-[45%] lg:w-[calc((100%-4rem)/3)]"
+              />
             ))}
           </div>
-        </div>
-
-        {/* Desktop: Grid Layout */}
-        <div className="hidden md:grid md:grid-cols-3 gap-10">
-          {projects.map((project) => (
-            <Link
-              key={project._id}
-              to={`/project/${project.slug}`}
-              className="block cursor-pointer group"
-              onMouseEnter={() => setHoveredId(project._id)}
-              onMouseLeave={() => setHoveredId(null)}
-            >
-              {/* Card — rounded corners wrap entire card */}
-              <div
-                className="rounded-2xl overflow-hidden shadow-md transition-all duration-300 group-hover:shadow-xl"
-                style={{ backgroundColor: project.color || '#F5F5F5' }}
-              >
-                {/* Image — no hover effects */}
-                <div
-                  className="w-full relative"
-                  style={{ aspectRatio: '4 / 5' }}
-                >
-                  {project.mainImage && (
-                    <img
-                      src={urlFor(project.mainImage).width(800).url()}
-                      alt={project.title}
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                </div>
-
-                {/* Project info — inside card */}
-                <div className="p-5 bg-white">
-                  <h3
-                    className="font-bold mb-1.5 transition-colors duration-200 group-hover:text-[#007AFF]"
-                    style={{
-                      fontFamily: 'JetBrains Mono, monospace',
-                      fontSize: '16px'
-                    }}
-                  >
-                    {project.title}
-                  </h3>
-                  <p
-                    className="mb-3"
-                    style={{
-                      fontFamily: 'Inter, sans-serif',
-                      fontSize: '13px',
-                      color: '#888888',
-                      lineHeight: '1.5'
-                    }}
-                  >
-                    {project.summary || project.tags?.join(' · ')}
-                  </p>
-                  <span
-                    className="inline-flex items-center gap-1.5 font-medium transition-all duration-200 group-hover:gap-2.5"
-                    style={{
-                      fontFamily: 'Inter, sans-serif',
-                      fontSize: '13px',
-                      color: '#007AFF'
-                    }}
-                  >
-                    View Project
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                    </svg>
-                  </span>
-                </div>
-              </div>
-            </Link>
-          ))}
         </div>
       </div>
     </section>

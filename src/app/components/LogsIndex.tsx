@@ -5,6 +5,7 @@ import { Footer } from './Footer';
 import { client, urlFor } from '../../sanity/client';
 import { POSTS_QUERY } from '../../sanity/queries';
 import { SEOHead } from './SEOHead';
+import { Tag } from './Tag';
 
 interface LogIndexEntry {
   id: string;
@@ -58,27 +59,17 @@ export function LogsIndex() {
       <header>
         <Navigation />
       </header>
-      <main className="bg-white text-black min-h-screen pt-24 pb-20">
-        <div className="max-w-[1000px] mx-auto px-4 md:px-8">
+      <main className="bg-paper text-ink min-h-screen pt-24 pb-16">
+        <div className="container-page">
           {/* Header */}
-          <div className="mb-12">
-            <h1
-              className="mb-4"
-              style={{
-                fontFamily: 'JetBrains Mono, monospace',
-                fontSize: '32px',
-                fontWeight: 'bold'
-              }}
-            >
-              LOGS
+          <div className="mb-8">
+            <p className="font-mono text-[11px] tracking-[0.15em] uppercase text-ink-muted border-t-2 border-ink pt-3 mb-3">
+              Index{logEntries.length > 0 && ` / (${String(logEntries.length).padStart(2, '0')})`}
+            </p>
+            <h1 className="font-display uppercase tracking-tight leading-[0.95] text-[clamp(28px,4.5vw,56px)] mb-4">
+              Logs
             </h1>
-            <p
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '16px',
-                color: '#666666'
-              }}
-            >
+            <p className="font-sans text-sm text-ink-muted">
               Technical articles and video tutorials on mobile development, architecture, and engineering practices.
             </p>
           </div>
@@ -88,20 +79,18 @@ export function LogsIndex() {
           ) : (
             <>
               {/* Logs List */}
-              <ul className="list-none p-0 m-0">
+              <ul className="list-none p-0 m-0 border-t border-hairline">
                 {logEntries.map((entry) => (
                   <li
                     key={entry.id}
                     onClick={() => handleLogClick(entry.link)}
-                    className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 py-6 border-b border-[#EEEEEE] cursor-pointer transition-colors hover:bg-[#FAFAFA]"
+                    className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 py-5 border-b border-hairline cursor-pointer transition-colors hover:bg-paper-2 group"
                   >
                     {/* Column 1-2: Thumbnail */}
                     <div className="md:col-span-2 md:pr-[15px]">
                       <div
-                        className="w-full md:w-[160px] bg-[#E0E0E0] border border-[#EEEEEE] transition-all duration-300 grayscale hover:grayscale-0 overflow-hidden"
-                        style={{
-                          aspectRatio: '16 / 9'
-                        }}
+                        className="w-full md:w-[160px] bg-paper-2 border border-hairline transition-all duration-300 grayscale group-hover:grayscale-0 overflow-hidden"
+                        style={{ aspectRatio: '16 / 9' }}
                         role="img"
                         aria-label={entry.thumbnailAlt}
                       >
@@ -118,73 +107,26 @@ export function LogsIndex() {
                     {/* Column 3-10: Content */}
                     <div className="md:col-span-8 flex flex-col justify-center gap-2">
                       {/* Top: Date and Category */}
-                      <div className="flex gap-3 items-center">
-                        <span
-                          style={{
-                            fontFamily: 'JetBrains Mono, monospace',
-                            fontSize: '12px',
-                            color: '#888888'
-                          }}
-                        >
-                          {entry.date}
-                        </span>
-                        <span
-                          style={{
-                            fontFamily: 'JetBrains Mono, monospace',
-                            fontSize: '12px',
-                            color: '#888888'
-                          }}
-                        >
-                          //
-                        </span>
-                        <span
-                          style={{
-                            fontFamily: 'JetBrains Mono, monospace',
-                            fontSize: '12px',
-                            color: entry.category === 'VIDEO' ? '#007AFF' : '#000000'
-                          }}
-                        >
-                          {entry.category}
-                        </span>
+                      <div className="flex gap-3 items-center font-mono text-xs text-ink-faint">
+                        <span>{entry.date}</span>
+                        <span>//</span>
+                        <Tag variant={entry.category === 'VIDEO' ? 'video' : 'default'}>{entry.category}</Tag>
                       </div>
 
                       {/* Middle: Title */}
-                      <h3
-                        className="m-0"
-                        style={{
-                          fontFamily: 'Inter, sans-serif',
-                          fontSize: '22px',
-                          fontWeight: '500',
-                          lineHeight: '1.3'
-                        }}
-                      >
+                      <h3 className="m-0 font-sans font-medium text-lg md:text-xl leading-snug group-hover:text-brand transition-colors">
                         {entry.title}
                       </h3>
 
                       {/* Bottom: Snippet */}
-                      <p
-                        className="m-0 line-clamp-1"
-                        style={{
-                          fontFamily: 'Inter, sans-serif',
-                          fontSize: '14px',
-                          color: '#666666',
-                          lineHeight: '1.5'
-                        }}
-                      >
+                      <p className="m-0 line-clamp-1 font-sans text-sm text-ink-muted leading-relaxed">
                         {entry.snippet}
                       </p>
                     </div>
 
                     {/* Column 11-12: Action */}
                     <div className="md:col-span-2 flex items-center md:justify-end">
-                      <span
-                        className="hover:underline"
-                        style={{
-                          fontFamily: 'JetBrains Mono, monospace',
-                          fontSize: '12px',
-                          color: '#000000'
-                        }}
-                      >
+                      <span className="font-mono text-xs group-hover:text-brand transition-colors">
                         {entry.category === 'VIDEO' ? 'WATCH' : 'READ'} ↗
                       </span>
                     </div>
@@ -192,36 +134,26 @@ export function LogsIndex() {
                 ))}
               </ul>
 
-              {/* Recommended Posts - simple logic: duplicate list for now or slice */}
+              {/* Recommended Posts */}
               {logEntries.length > 0 && (
-                <div className="mt-20 pt-12 border-t border-[#EEEEEE]">
-                  <h2
-                    className="mb-8"
-                    style={{
-                      fontFamily: 'JetBrains Mono, monospace',
-                      fontSize: '16px',
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    RECOMMENDED
+                <div className="mt-12 pt-10 border-t border-hairline">
+                  <h2 className="font-mono font-bold text-base mb-6">
+                    <span className="text-ink-faint">// </span>RECOMMENDED
                   </h2>
 
                   {/* Horizontal Scroll Container */}
                   <div className="overflow-x-auto scrollbar-hide -mx-4 md:-mx-8 px-4 md:px-8 pb-4">
                     <div className="flex gap-4 min-w-max">
-                      {/* Recommended Post Cards */}
                       {logEntries.slice(0, 4).map((entry) => (
                         <div
                           key={`rec-${entry.id}`}
                           onClick={() => handleLogClick(entry.link)}
-                          className="w-[280px] flex-shrink-0 border border-[#EEEEEE] cursor-pointer transition-all hover:border-black"
+                          className="w-[280px] flex-shrink-0 border border-hairline cursor-pointer transition-colors hover:border-ink group"
                         >
                           {/* Thumbnail */}
                           <div
-                            className="w-full bg-[#E0E0E0] border-b border-[#EEEEEE] grayscale hover:grayscale-0 transition-all duration-300 overflow-hidden"
-                            style={{
-                              aspectRatio: '16 / 9'
-                            }}
+                            className="w-full bg-paper-2 border-b border-hairline grayscale group-hover:grayscale-0 transition-all duration-300 overflow-hidden"
+                            style={{ aspectRatio: '16 / 9' }}
                             role="img"
                             aria-label={entry.thumbnailAlt}
                           >
@@ -237,74 +169,31 @@ export function LogsIndex() {
                           {/* Content */}
                           <div className="p-4">
                             {/* Date and Category */}
-                            <div className="flex gap-2 items-center mb-3">
-                              <span
-                                style={{
-                                  fontFamily: 'JetBrains Mono, monospace',
-                                  fontSize: '10px',
-                                  color: '#888888'
-                                }}
-                              >
-                                {entry.date}
-                              </span>
-                              <span
-                                style={{
-                                  fontFamily: 'JetBrains Mono, monospace',
-                                  fontSize: '10px',
-                                  color: '#888888'
-                                }}
-                              >
-                                //
-                              </span>
-                              <span
-                                style={{
-                                  fontFamily: 'JetBrains Mono, monospace',
-                                  fontSize: '10px',
-                                  color: entry.category === 'VIDEO' ? '#007AFF' : '#000000'
-                                }}
-                              >
-                                {entry.category}
-                              </span>
+                            <div className="flex gap-2 items-center mb-3 font-mono text-[10px] text-ink-faint">
+                              <span>{entry.date}</span>
+                              <span>//</span>
+                              <Tag variant={entry.category === 'VIDEO' ? 'video' : 'default'}>{entry.category}</Tag>
                             </div>
 
                             {/* Title */}
                             <h3
-                              className="mb-2 line-clamp-2"
-                              style={{
-                                fontFamily: 'Inter, sans-serif',
-                                fontSize: '16px',
-                                fontWeight: '500',
-                                lineHeight: '1.4',
-                                minHeight: '44px'
-                              }}
+                              className="mb-2 line-clamp-2 font-sans font-medium text-base leading-snug"
+                              style={{ minHeight: '44px' }}
                             >
                               {entry.title}
                             </h3>
 
                             {/* Snippet */}
                             <p
-                              className="mb-3 line-clamp-2"
-                              style={{
-                                fontFamily: 'Inter, sans-serif',
-                                fontSize: '12px',
-                                color: '#666666',
-                                lineHeight: '1.5',
-                                minHeight: '36px'
-                              }}
+                              className="mb-3 line-clamp-2 font-sans text-xs text-ink-muted leading-relaxed"
+                              style={{ minHeight: '36px' }}
                             >
                               {entry.snippet}
                             </p>
 
                             {/* Action */}
-                            <div className="pt-2 border-t border-[#EEEEEE]">
-                              <span
-                                className="hover:underline"
-                                style={{
-                                  fontFamily: 'JetBrains Mono, monospace',
-                                  fontSize: '11px',
-                                  color: '#000000'
-                                }}
-                              >
+                            <div className="pt-2 border-t border-hairline">
+                              <span className="font-mono text-[11px] group-hover:text-brand transition-colors">
                                 {entry.category === 'VIDEO' ? 'WATCH' : 'READ'} ↗
                               </span>
                             </div>

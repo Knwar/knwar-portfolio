@@ -1,5 +1,30 @@
 @custom-variant dark (&:is(.dark *));
 
+/* Brutalist-poster design tokens (dark base) */
+@theme {
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Archivo Black', 'Inter', system-ui, sans-serif;
+  --color-paper: #0A0A0A;
+  --color-paper-2: #141414;
+  --color-ink: #F2F2F2;
+  --color-ink-muted: #9A9A9A;
+  --color-ink-faint: #5A5A5A;
+  --color-hairline: #262626;
+  --color-brand: #007AFF;
+}
+
+/* Single page container: full-width feel with consistent gutters */
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1440px;
+  padding-inline: 1rem;
+  @media (width >= 768px) {
+    padding-inline: 2rem;
+  }
+}
+
 :root {
   --font-size: 16px;
   --background: #ffffff;

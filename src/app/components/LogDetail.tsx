@@ -5,9 +5,10 @@ import { POST_BY_SLUG_QUERY } from '../../sanity/queries';
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
 import { PortableText } from '@portabletext/react';
-import { ArrowLeft, Share2, Twitter, Linkedin, Copy } from 'lucide-react';
+import { ArrowLeft, Twitter, Linkedin, Copy } from 'lucide-react';
 import { SEOHead } from './SEOHead';
 import { StructuredData, buildArticleSchema } from './StructuredData';
+import { Tag } from './Tag';
 
 interface RelatedPost {
   _id: string;
@@ -45,13 +46,13 @@ const ptComponents = {
         <img
           src={urlFor(value).fit('max').auto('format').url()}
           alt={value.alt || 'Log image'}
-          className="my-8 w-full rounded-lg"
+          className="my-8 w-full border border-hairline"
         />
       );
     },
     code: ({ value }: any) => {
       return (
-        <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto my-6">
+        <pre className="bg-paper-2 border border-hairline p-4 overflow-x-auto my-6 font-mono text-sm">
           <code>{value.code}</code>
         </pre>
       );
@@ -60,7 +61,7 @@ const ptComponents = {
   block: {
     h2: ({ children }: any) => <h2 className="text-2xl font-bold mt-8 mb-4 font-mono">{children}</h2>,
     h3: ({ children }: any) => <h3 className="text-xl font-bold mt-6 mb-3 font-mono">{children}</h3>,
-    blockquote: ({ children }: any) => <blockquote className="border-l-4 border-black pl-4 italic my-6">{children}</blockquote>,
+    blockquote: ({ children }: any) => <blockquote className="border-l-4 border-ink pl-4 italic my-6">{children}</blockquote>,
   }
 };
 
@@ -83,8 +84,8 @@ export function LogDetail() {
     }
   }, [slug]);
 
-  if (loading) return <div className="min-h-screen bg-white flex items-center justify-center font-mono">Loading...</div>;
-  if (!log) return <div className="min-h-screen bg-white flex items-center justify-center font-mono">Log not found.</div>;
+  if (loading) return <div className="min-h-screen bg-paper text-ink flex items-center justify-center font-mono">Loading...</div>;
+  if (!log) return <div className="min-h-screen bg-paper text-ink flex items-center justify-center font-mono">Log not found.</div>;
 
   const logImageUrl = log.mainImage ? urlFor(log.mainImage).width(1200).height(675).url() : undefined;
 
@@ -109,16 +110,17 @@ export function LogDetail() {
       <header>
         <Navigation />
       </header>
-      <article className="min-h-screen bg-white pt-32 pb-20 px-4 md:px-8">
-        <div className="max-w-[800px] mx-auto">
+      <article className="min-h-screen bg-paper text-ink pt-24 pb-16">
+        <div className="container-page">
+          <div className="max-w-[720px] mx-auto">
           {/* Header */}
-          <div className="mb-12">
-            <Link to="/logs" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-black mb-8 font-mono">
-              <ArrowLeft size={16} />
-              BACK TO LOGS
+          <div className="mb-10">
+            <Link to="/logs" className="inline-flex items-center gap-2 text-xs tracking-wider text-ink-muted hover:text-ink transition-colors mb-6 font-mono">
+              <ArrowLeft size={14} />
+              INDEX / LOGS
             </Link>
 
-            <div className="flex flex-wrap gap-4 items-center mb-6 text-sm font-mono text-gray-500">
+            <div className="flex flex-wrap gap-3 items-center mb-5 text-xs font-mono text-ink-muted">
               <span>{log.publishedAt ? new Date(log.publishedAt).toLocaleDateString() : ''}</span>
               {log.readTime && (
                 <>
@@ -126,20 +128,23 @@ export function LogDetail() {
                   <span>{log.readTime}</span>
                 </>
               )}
-              {log.category && (
+              {log.author && (
                 <>
                   <span>//</span>
-                  <span className="uppercase">{log.category}</span>
+                  <span className="uppercase">BY {log.author}</span>
                 </>
+              )}
+              {log.type && (
+                <Tag variant={log.type.toUpperCase() === 'VIDEO' ? 'video' : 'default'}>{log.type}</Tag>
               )}
             </div>
 
-            <h1 className="text-3xl md:text-5xl font-bold mb-8 font-mono leading-tight">
+            <h1 className="font-display uppercase text-[clamp(30px,5.5vw,64px)] mb-6 leading-[0.95] tracking-tight">
               {log.title}
             </h1>
 
             {log.excerpt && (
-              <p className="text-xl text-gray-600 mb-8 font-serif italic">
+              <p className="font-sans text-lg text-ink-muted leading-relaxed">
                 {log.excerpt}
               </p>
             )}
@@ -147,28 +152,28 @@ export function LogDetail() {
 
           {/* Main Image */}
           {log.mainImage && (
-            <div className="mb-12">
+            <div className="mb-10">
               <img
                 src={urlFor(log.mainImage).width(1200).height(675).url()}
                 alt={log.title}
-                className="w-full aspect-video object-cover"
+                className="w-full aspect-video object-cover border border-hairline"
               />
             </div>
           )}
 
           {/* Content */}
-          <div className="prose prose-lg max-w-none mb-20 font-sans">
+          <div className="prose prose-lg max-w-none mb-12 font-sans">
             <PortableText value={log.body} components={ptComponents} />
           </div>
 
           {/* Footer / Share */}
-          <div className="border-t border-gray-200 pt-8 flex justify-between items-center">
-            <div className="font-mono text-sm text-gray-500">
-              SHARE THIS LOG
+          <div className="border-t border-hairline pt-6 flex justify-between items-center">
+            <div className="font-mono text-xs tracking-[0.1em] text-ink-muted uppercase">
+              Share this log
             </div>
             <div className="flex gap-4">
               <button
-                className="p-2 hover:bg-gray-100 rounded-full"
+                className="p-2 hover:bg-paper-2 hover:text-brand transition-colors"
                 onClick={() => {
                   const url = encodeURIComponent(window.location.href);
                   const text = encodeURIComponent(log.title);
@@ -179,7 +184,7 @@ export function LogDetail() {
                 <Twitter size={20} />
               </button>
               <button
-                className="p-2 hover:bg-gray-100 rounded-full"
+                className="p-2 hover:bg-paper-2 hover:text-brand transition-colors"
                 onClick={() => {
                   const url = encodeURIComponent(window.location.href);
                   window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'noopener,noreferrer');
@@ -189,7 +194,7 @@ export function LogDetail() {
                 <Linkedin size={20} />
               </button>
               <button
-                className="p-2 hover:bg-gray-100 rounded-full"
+                className="p-2 hover:bg-paper-2 hover:text-brand transition-colors"
                 onClick={() => {
                   navigator.clipboard.writeText(window.location.href).then(() => {
                     alert('Link copied to clipboard!');
@@ -204,14 +209,16 @@ export function LogDetail() {
 
           {/* Related Logs */}
           {log.relatedPosts && log.relatedPosts.length > 0 && (
-            <div className="mt-20 border-t border-black pt-12">
-              <h3 className="font-mono font-bold text-xl mb-8">RELATED LOGS</h3>
-              <div className="space-y-6">
+            <div className="mt-12 border-t border-hairline pt-8">
+              <h3 className="font-mono font-bold text-lg mb-5">
+                <span className="text-ink-faint">// </span>RELATED LOGS
+              </h3>
+              <div className="border-t border-hairline">
                 {log.relatedPosts.map((post) => (
-                  <Link key={post._id} to={`/log/${post.slug}`} className="block group">
-                    <div className="flex justify-between items-baseline">
-                      <h4 className="font-sans text-lg group-hover:underline">{post.title}</h4>
-                      <span className="font-mono text-sm text-gray-500">{new Date(post.publishedAt).toLocaleDateString()}</span>
+                  <Link key={post._id} to={`/log/${post.slug}`} className="block group border-b border-hairline py-3">
+                    <div className="flex justify-between items-baseline gap-4">
+                      <h4 className="font-sans text-base group-hover:text-brand transition-colors">{post.title}</h4>
+                      <span className="font-mono text-xs text-ink-muted flex-shrink-0">{new Date(post.publishedAt).toLocaleDateString()}</span>
                     </div>
                   </Link>
                 ))}
@@ -219,6 +226,7 @@ export function LogDetail() {
             </div>
           )}
 
+          </div>
         </div>
       </article>
       <Footer />

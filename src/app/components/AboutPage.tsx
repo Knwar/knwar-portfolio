@@ -15,7 +15,7 @@ export function AboutPage() {
             <header>
                 <Navigation />
             </header>
-            <main className="bg-white text-black min-h-screen pt-20">
+            <main className="bg-paper text-ink min-h-screen pt-16">
                 <About />
                 <TechStack />
             </main>
