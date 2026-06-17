@@ -153,7 +153,7 @@ export function CaseStudy() {
         data={buildProjectSchema({
           title: project.title,
           description: project.tags?.join(', ') || `Case study: ${project.title}`,
-          url: `https://knwar.dev/project/${slug}`,
+          url: `https://knwar.com/project/${slug}`,
           techStack: project.tags,
           datePublished: project.publishedAt,
           image: projectImageUrl,

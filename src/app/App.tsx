@@ -32,8 +32,8 @@ function HomePage() {
   return (
     <>
       <SEOHead
-        title="Knwar — Mobile Developer & Engineer | Flutter, Swift, Full-Stack Portfolio"
-        description="Portfolio showcasing 10+ years of shipped Flutter, Swift, Node.js and full-stack projects. Explore case studies, technical logs, and engineering insights."
+        title="Knwar — I Ship Apps | Flutter & AI Developer"
+        description="Ten years of shipping Flutter, Swift & full-stack apps — built in public, broken down with zero fluff. Case studies, dev logs and engineering that ships."
         canonicalPath="/"
       />
       <StructuredData data={homepageSchema} />

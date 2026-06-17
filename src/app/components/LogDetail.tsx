@@ -102,7 +102,7 @@ export function LogDetail() {
         data={buildArticleSchema({
           title: log.seoTitle || log.title,
           description: log.metaDescription || log.excerpt || `Read ${log.title} by Knwar`,
-          url: `https://knwar.dev/log/${slug}`,
+          url: `https://knwar.com/log/${slug}`,
           datePublished: log.publishedAt,
           image: logImageUrl,
         })}

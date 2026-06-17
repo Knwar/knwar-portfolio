@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const BASE_URL = 'https://knwar.dev';
+const BASE_URL = 'https://knwar.com';
 
 interface SEOHeadProps {
   title: string;
@@ -78,7 +78,7 @@ export function SEOHead({
 
     // Cleanup: reset to defaults when component unmounts
     return () => {
-      document.title = 'Knwar — Mobile Developer & Engineer | Flutter, Swift, Full-Stack Portfolio';
+      document.title = 'Knwar — I Ship Apps | Flutter & AI Developer';
     };
   }, [title, description, canonicalPath, ogImage, ogType, twitterCard, noIndex]);
 

@@ -22,7 +22,7 @@ export const homepageSchema = {
     {
       '@type': 'Person',
       name: 'Knwar',
-      url: 'https://knwar.dev',
+      url: 'https://knwar.com',
       jobTitle: 'Mobile Developer & Engineer',
       description:
         'Mobile developer with 10+ years of experience shipping Flutter, Swift, Node.js and full-stack projects.',
@@ -38,7 +38,7 @@ export const homepageSchema = {
     {
       '@type': 'WebSite',
       name: 'Knwar Portfolio',
-      url: 'https://knwar.dev',
+      url: 'https://knwar.com',
       description:
         'Portfolio showcasing 10+ years of shipped mobile and full-stack projects.',
     },
@@ -66,12 +66,12 @@ export function buildArticleSchema(params: {
     author: {
       '@type': 'Person',
       name: 'Knwar',
-      url: 'https://knwar.dev',
+      url: 'https://knwar.com',
     },
     publisher: {
       '@type': 'Person',
       name: 'Knwar',
-      url: 'https://knwar.dev',
+      url: 'https://knwar.com',
     },
   };
 }
@@ -99,7 +99,7 @@ export function buildProjectSchema(params: {
     creator: {
       '@type': 'Person',
       name: 'Knwar',
-      url: 'https://knwar.dev',
+      url: 'https://knwar.com',
     },
   };
 }

@@ -45,9 +45,8 @@ export function Hero() {
 
         {/* Sub copy */}
         <p className="font-sans text-base md:text-lg leading-relaxed text-ink-muted max-w-2xl mx-auto mt-8">
-          Mobile developer &amp; YouTuber. Ten years of Flutter, Swift and
-          full-stack work — shipped, not shelved. I build in public and break
-          down exactly how.
+          Mobile developer. Ten years of Flutter, Swift and full-stack work —
+          shipped, not shelved. I build in public and break down exactly how.
         </p>
 
         {/* CTA row */}
