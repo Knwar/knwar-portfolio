@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "chatModels": [
     {
       "id": "qwen3-0.6b-q4",
@@ -32,6 +32,21 @@
       "mmprojUrl": null
     },
     {
+      "id": "qwen3.5-0.8b-q4",
+      "name": "Qwen 3.5 0.8B",
+      "hfUrl": "https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF/resolve/main/Qwen3.5-0.8B-Q4_K_M.gguf",
+      "sizeMb": 508,
+      "ramEstimateMb": 1000,
+      "description": "Alibaba's newest tiny Qwen with native vision and hybrid thinking. Sees images on almost any phone.",
+      "tags": ["Fast", "Vision", "Reasoning"],
+      "emoji": "⚡",
+      "accentColor": "0xFF6C5CE7",
+      "recommended": false,
+      "multimodal": true,
+      "provider": "local",
+      "mmprojUrl": "https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF/resolve/main/mmproj-F16.gguf"
+    },
+    {
       "id": "tinyllama-1.1b-chat-q4",
       "name": "TinyLlama 1.1B",
       "hfUrl": "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf",
@@ -41,6 +56,21 @@
       "tags": ["Fast", "Classic"],
       "emoji": "🦙",
       "accentColor": "0xFFFF9500",
+      "recommended": false,
+      "multimodal": false,
+      "provider": "local",
+      "mmprojUrl": null
+    },
+    {
+      "id": "lfm2.5-1.2b-instruct-q4",
+      "name": "LFM2.5 1.2B",
+      "hfUrl": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/resolve/main/LFM2.5-1.2B-Instruct-Q4_K_M.gguf",
+      "sizeMb": 697,
+      "ramEstimateMb": 1000,
+      "description": "Liquid AI's hybrid edge model. Built for fast CPU decoding with strong quality for its size.",
+      "tags": ["Fast", "Efficient"],
+      "emoji": "💧",
+      "accentColor": "0xFF00B3A6",
       "recommended": false,
       "multimodal": false,
       "provider": "local",
@@ -122,6 +152,51 @@
       "mmprojUrl": null
     },
     {
+      "id": "qwen3.5-2b-q4",
+      "name": "Qwen 3.5 2B",
+      "hfUrl": "https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/Qwen3.5-2B-Q4_K_M.gguf",
+      "sizeMb": 1222,
+      "ramEstimateMb": 2300,
+      "description": "Balanced Qwen 3.5 with native vision and optional thinking mode. A strong everyday pick.",
+      "tags": ["Balanced", "Vision", "Reasoning"],
+      "emoji": "⭐",
+      "accentColor": "0xFF6C5CE7",
+      "recommended": false,
+      "multimodal": true,
+      "provider": "local",
+      "mmprojUrl": "https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/mmproj-F16.gguf"
+    },
+    {
+      "id": "minicpm5-2b-q4",
+      "name": "MiniCPM5 2B",
+      "hfUrl": "https://huggingface.co/openbmb/MiniCPM5-2B-GGUF/resolve/main/MiniCPM5-2B-Q4_K_M.gguf",
+      "sizeMb": 1489,
+      "ramEstimateMb": 2000,
+      "description": "OpenBMB's 2B built for on-device use. Competes with 4B-class models and supports tool calling.",
+      "tags": ["Capable", "Tools"],
+      "emoji": "🚀",
+      "accentColor": "0xFF1E88E5",
+      "recommended": false,
+      "multimodal": false,
+      "provider": "local",
+      "mmprojUrl": null
+    },
+    {
+      "id": "smollm3-3b-q4",
+      "name": "SmolLM3 3B",
+      "hfUrl": "https://huggingface.co/unsloth/SmolLM3-3B-GGUF/resolve/main/SmolLM3-3B-Q4_K_M.gguf",
+      "sizeMb": 1827,
+      "ramEstimateMb": 2500,
+      "description": "Hugging Face's fully open 3B with 128K context, multilingual support and optional reasoning.",
+      "tags": ["Long Context", "Multilingual"],
+      "emoji": "🤏",
+      "accentColor": "0xFFFFD21E",
+      "recommended": false,
+      "multimodal": false,
+      "provider": "local",
+      "mmprojUrl": null
+    },
+    {
       "id": "llama-3.2-3b-instruct-q4",
       "name": "Llama 3.2 3B",
       "hfUrl": "https://huggingface.co/unsloth/Llama-3.2-3B-Instruct-GGUF/resolve/main/Llama-3.2-3B-Instruct-Q4_K_M.gguf",
@@ -180,6 +255,21 @@
       "multimodal": false,
       "provider": "local",
       "mmprojUrl": null
+    },
+    {
+      "id": "qwen3.5-4b-q4",
+      "name": "Qwen 3.5 4B",
+      "hfUrl": "https://huggingface.co/unsloth/Qwen3.5-4B-GGUF/resolve/main/Qwen3.5-4B-Q4_K_M.gguf",
+      "sizeMb": 2614,
+      "ramEstimateMb": 4200,
+      "description": "The most capable Qwen 3.5 for phones. Native vision plus thinking mode; best on 8GB+ RAM devices.",
+      "tags": ["Best Quality", "Vision", "Reasoning"],
+      "emoji": "🧠",
+      "accentColor": "0xFF6C5CE7",
+      "recommended": false,
+      "multimodal": true,
+      "provider": "local",
+      "mmprojUrl": "https://huggingface.co/unsloth/Qwen3.5-4B-GGUF/resolve/main/mmproj-F16.gguf"
     }
   ],
   "embeddingModel": {
