@@ -41,7 +41,7 @@
       "tags": ["Fast", "Vision", "Reasoning"],
       "emoji": "⚡",
       "accentColor": "0xFF6C5CE7",
-      "recommended": false,
+      "recommended": true,
       "multimodal": true,
       "provider": "local",
       "mmprojUrl": "https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF/resolve/main/mmproj-F16.gguf"
@@ -266,7 +266,7 @@
       "tags": ["Best Quality", "Vision", "Reasoning"],
       "emoji": "🧠",
       "accentColor": "0xFF6C5CE7",
-      "recommended": true,
+      "recommended": false,
       "multimodal": true,
       "provider": "local",
       "mmprojUrl": "https://huggingface.co/unsloth/Qwen3.5-4B-GGUF/resolve/main/mmproj-F16.gguf"
