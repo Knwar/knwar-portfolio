@@ -131,7 +131,7 @@
       "tags": ["Balanced", "Reasoning"],
       "emoji": "⭐",
       "accentColor": "0xFF6C5CE7",
-      "recommended": true,
+      "recommended": false,
       "multimodal": false,
       "provider": "local",
       "mmprojUrl": null
@@ -161,7 +161,7 @@
       "tags": ["Balanced", "Vision", "Reasoning"],
       "emoji": "⭐",
       "accentColor": "0xFF6C5CE7",
-      "recommended": false,
+      "recommended": true,
       "multimodal": true,
       "provider": "local",
       "mmprojUrl": "https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/mmproj-F16.gguf"
@@ -251,7 +251,7 @@
       "tags": ["Best Quality", "Reasoning"],
       "emoji": "🧠",
       "accentColor": "0xFF6C5CE7",
-      "recommended": true,
+      "recommended": false,
       "multimodal": false,
       "provider": "local",
       "mmprojUrl": null
@@ -266,7 +266,7 @@
       "tags": ["Best Quality", "Vision", "Reasoning"],
       "emoji": "🧠",
       "accentColor": "0xFF6C5CE7",
-      "recommended": false,
+      "recommended": true,
       "multimodal": true,
       "provider": "local",
       "mmprojUrl": "https://huggingface.co/unsloth/Qwen3.5-4B-GGUF/resolve/main/mmproj-F16.gguf"
